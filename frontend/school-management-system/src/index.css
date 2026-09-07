@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Comorant:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Comorant", serif; /* you had a typo: Commorant -> Comorant */
+  --font-sans: "Poppins", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-slate-950 text-slate-100;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+}
+
+/* Keep controls neutral when they receive focus. */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgb(51 65 85) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+button {
+  box-shadow: none !important;
+}
