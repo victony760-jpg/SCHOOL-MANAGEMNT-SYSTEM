@@ -43,7 +43,7 @@ export default function MainLayout() {
   const menu = requiredRole === 'admin' ? adminMenu : studentMenu;
 
   return (
-    <div className="flex h-screen bg-slate-950 dark:bg-slate-950 light:bg-slate-50 text-slate-100 dark:text-slate-100 light:text-slate-900 overflow-hidden">
+    <div className="flex min-h-screen lg:h-screen bg-slate-950 dark:bg-slate-950 light:bg-slate-50 text-slate-100 dark:text-slate-100 light:text-slate-900 overflow-x-hidden">
       <Toaster position="top-right" richColors />
 
       {/* MOBILE OVERLAY */}
@@ -56,7 +56,7 @@ export default function MainLayout() {
       </AnimatePresence>
 
       {/* SIDEBAR */}
-      <aside className={`fixed lg:relative z-50 w-64 h-full bg-slate-900 dark:bg-slate-900 light:bg-white border-r border-slate-800 dark:border-slate-800 light:border-slate-200 p-6 flex flex-col transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300`}>
+      <aside className={`fixed lg:relative z-50 w-64 h-dvh lg:h-full bg-slate-900 dark:bg-slate-900 light:bg-white border-r border-slate-800 dark:border-slate-800 light:border-slate-200 p-6 flex flex-col transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300`}>
 
         <div className="flex items-center justify-between mb-10">
           <h1 className="text-xl font-serif font-bold text-emerald-400">VICTONY</h1>
@@ -83,9 +83,9 @@ export default function MainLayout() {
       </aside>
 
       {/* MAIN CONTENT */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* HEADER */}
-        <header className="h-16 flex items-center justify-between px-6 sm:px-8 bg-slate-900/50 dark:bg-slate-900/50 light:bg-white border-b border-slate-800 dark:border-slate-800 light:border-slate-200 backdrop-blur-xl">
+        <header className="h-16 shrink-0 flex items-center justify-between px-4 sm:px-8 bg-slate-900/50 dark:bg-slate-900/50 light:bg-white border-b border-slate-800 dark:border-slate-800 light:border-slate-200 backdrop-blur-xl">
           <button onClick={() => setSidebarOpen(true)} className="lg:hidden"><Menu /></button>
 
           <div className="flex items-center gap-4 ml-auto">
@@ -101,7 +101,7 @@ export default function MainLayout() {
         </header>
 
         {/* PAGE CONTENT */}
-        <main className="flex-1 overflow-y-auto p-6 sm:p-8">
+        <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-4 sm:p-8">
           <Outlet />
         </main>
       </div>
