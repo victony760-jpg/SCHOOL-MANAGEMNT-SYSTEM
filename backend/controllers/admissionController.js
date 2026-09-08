@@ -1,6 +1,6 @@
 import Submission from "../models/submission.js";
 import Class from "../models/Class.js";
-import { uploadToSupabase } from "../middleware/upload.js";
+import { uploadToSupabase, createSignedFileUrl } from "../middleware/upload.js";
 import { success, error } from "../utils/response.js";
 import User from "../models/User.js";
 import StudentProfile from "../models/StudentProfile.js";
@@ -86,7 +86,19 @@ export const getAdmissions = async (req, res) => {
     const submissions = await Submission.find({ type: "admission" })
       .populate("classApplying", "fullClassName name")
       .sort({ createdAt: -1 });
-    return success(res, submissions);
+    const admissions = await Promise.all(
+      submissions.map(async (submission) => {
+        const data = submission.toObject();
+        data.applicantPhoto = data.applicantPhoto
+          ? await createSignedFileUrl(data.applicantPhoto)
+          : null;
+        data.documents = data.documents
+          ? await createSignedFileUrl(data.documents)
+          : null;
+        return data;
+      }),
+    );
+    return success(res, admissions);
   } catch (err) {
     return error(res, err.message);
   }

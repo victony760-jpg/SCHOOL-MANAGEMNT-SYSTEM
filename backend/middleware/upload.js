@@ -62,6 +62,17 @@ export const extractPathFromUrl = (url) => {
   return parts[1] || null;
 };
 
+export const createSignedFileUrl = async (url, expiresIn = 3600) => {
+  const filePath = extractPathFromUrl(url);
+  if (!filePath) return url;
+
+  const { data, error } = await supabase.storage
+    .from(supabaseBucket)
+    .createSignedUrl(filePath, expiresIn);
+  if (error) throw error;
+  return data.signedUrl;
+};
+
 export const deleteFile = async (filePath) => {
   if (!filePath) return;
   try {

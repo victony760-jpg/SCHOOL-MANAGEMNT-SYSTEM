@@ -32,7 +32,11 @@ const AdminAdmissions = () => {
       }
       fetchApplications();
     } catch (err) {
-      toast.error(err.response?.data?.message || `Failed to ${status.toLowerCase()}`)
+      toast.error(
+        err.code === 'ECONNABORTED'
+          ? 'Approval is taking too long. Check the student status before trying again.'
+          : err.response?.data?.message || `Failed to ${status.toLowerCase()}`,
+      );
     }
   }
 

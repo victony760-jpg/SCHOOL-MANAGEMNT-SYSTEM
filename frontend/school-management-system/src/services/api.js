@@ -115,7 +115,15 @@ export const submitAdmission = async (formData) =>
     })
   ).data;
 export const updateAdmissionStatus = async (id, status) =>
-  (await api.patch(`/admissions/${id}/status`, { status })).data;
+  (
+    await api.patch(
+      `/admissions/${id}/status`,
+      { status },
+      {
+        timeout: 120000,
+      },
+    )
+  ).data;
 // CLASSES
 export const getClasses = async () => {
   const response = (await api.get("/classes")).data;
