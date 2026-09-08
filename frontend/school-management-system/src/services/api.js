@@ -111,7 +111,7 @@ export const getAdmissions = async () => (await api.get("/admissions")).data;
 export const submitAdmission = async (formData) =>
   (
     await api.post("/admissions", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+      timeout: 120000,
     })
   ).data;
 export const updateAdmissionStatus = async (id, status) =>

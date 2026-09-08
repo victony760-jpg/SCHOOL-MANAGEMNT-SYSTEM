@@ -59,7 +59,11 @@ const Admissions = () => {
       setFormData(initialFormState);
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Submission failed');
+      toast.error(
+        err.code === 'ECONNABORTED'
+          ? 'The upload is taking too long. Please try again.'
+          : err.response?.data?.message || 'Submission failed',
+      );
     } finally {
       setIsSubmitting(false);
     }
