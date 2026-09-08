@@ -8,7 +8,14 @@ const normalizeClassName = (value) =>
 
 export const getGrades = async (req, res) => {
   try {
-    const { className, subject, page = 1, limit = 50 } = req.query;
+    const {
+      className,
+      subject,
+      term,
+      session,
+      page = 1,
+      limit = 50,
+    } = req.query;
     const query = {};
     if (className)
       query.className = new RegExp(
@@ -16,6 +23,8 @@ export const getGrades = async (req, res) => {
         "i",
       );
     if (subject) query.subject = subject;
+    if (term) query.term = term;
+    if (session) query.session = session;
 
     const total = await Grade.countDocuments(query);
     const grades = await Grade.find(query)

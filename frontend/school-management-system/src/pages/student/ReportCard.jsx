@@ -8,7 +8,7 @@ import api from '../../services/api';
 const ReportCard = () => {
   const [loading, setLoading] = useState(true);
   const [report, setReport] = useState(null);
-  const [term, setTerm] = useState('First Term');
+  const [term, setTerm] = useState('Third Term');
   const [session, setSession] = useState('2025/2026');
 
   const terms = ['First Term', 'Second Term', 'Third Term'];
@@ -102,7 +102,7 @@ const ReportCard = () => {
           <p className="text-slate-500 text-sm mt-2">Your teacher or administrator must enter and save grades before they appear here.</p>
         </div>
       ) : (
-        <div className="p-8 rounded-2xl bg-slate-900/70 border-slate-800/80 backdrop-blur-xl space-y-8">
+        <div className="min-w-0 p-4 sm:p-8 rounded-2xl bg-slate-900/70 border-slate-800/80 backdrop-blur-xl space-y-8">
           <div className="flex flex-wrap justify-between gap-4 border-b border-slate-800 pb-4 text-sm font-mono">
             <div><span className="text-slate-400">Student:</span> <span className="text-white font-bold">{report.student.fullName}</span></div>
             <div><span className="text-slate-400">Class:</span> <span className="text-amber-400 font-bold">{report.class}</span></div>
@@ -110,7 +110,7 @@ const ReportCard = () => {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-300">
+            <table className="w-full min-w-160 text-left text-sm text-slate-300">
               <thead className="bg-slate-950/60 font-mono text-xs uppercase text-slate-400 border-b border-slate-800">
                 <tr>
                   <th className="p-3">Subject</th>

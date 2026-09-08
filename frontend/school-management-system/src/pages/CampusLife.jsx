@@ -75,7 +75,7 @@ const CampusLife = () => {
       <section className="relative pt-32 pb-20 px-6 text-center bg-gradient-to-b from-blue-950/60 via-blue-900/20 to-slate-950 border-b border-blue-900/40">
         <div className="relative z-10 max-w-4xl mx-auto">
           <span className="inline-flex items-center gap-2 text-emerald-400 font-serif tracking-[0.2em] uppercase text-xs font-semibold bg-emerald-500/10 px-4 py-1.5 rounded-full border-emerald-500/20 mb-4">
-            <Sparkles className="w-3.5 h-3.5" /> Student Life
+
           </span>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
             Campus Life at Victony

@@ -83,35 +83,35 @@ const AdminAttendance = () => {
 
   return (
     <div className="space-y-8">
-      <div className="border-b border-slate-800/80 pb-6 flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="border-b border-slate-800/80 pb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
           <span className="text-emerald-400 text-xs font-mono uppercase tracking-widest">Class Registers</span>
-          <h1 className="text-3xl font-serif font-bold text-white mt-1">Daily Attendance Management</h1>
+          <h1 className="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">Daily Attendance Management</h1>
         </div>
-        <div className="flex gap-3">
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="bg-slate-900/50 border border-slate-800 rounded-lg px-4 py-2 text-sm text-white" />
-          <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="bg-slate-900/50 border border-slate-800 rounded-lg px-4 py-2 text-sm text-white">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full sm:w-auto bg-slate-900/50 border border-slate-800 rounded-lg px-4 py-2 text-sm text-white" />
+          <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="w-full sm:w-auto min-w-0 bg-slate-900/50 border border-slate-800 rounded-lg px-4 py-2 text-sm text-white">
             {classes.map(c => <option key={c._id} value={c._id}>{c.fullClassName || c.name}</option>)}
           </select>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         <div className="p-5 rounded-xl bg-slate-900/70 border border-slate-800/80"><div className="text-slate-400 text-sm">Total</div><div className="text-2xl font-bold text-white mt-1">{students.length}</div></div>
         <div className="p-5 rounded-xl bg-slate-900/70 border-slate-800/80"><div className="text-emerald-400 text-sm">Present</div><div className="text-2xl font-bold text-emerald-400 mt-1">{presentCount}</div></div>
         <div className="p-5 rounded-xl bg-slate-900/70 border border-slate-800/80"><div className="text-rose-400 text-sm">Absent</div><div className="text-2xl font-bold text-rose-400 mt-1">{absentCount}</div></div>
         <div className="p-5 rounded-xl bg-slate-900/70 border border-slate-800/80"><div className="text-amber-400 text-sm">Rate</div><div className="text-2xl font-bold text-amber-400 mt-1">{rate}%</div></div>
       </div>
 
-      <div className="flex justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="relative flex-1"><Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" /><input placeholder="Search student..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-slate-900/50 border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm w-full" /></div>
-        <button onClick={() => markAll('Present')} className="px-4 py-2 bg-emerald-500/10 text-emerald-400 border-emerald-500/30 rounded-lg text-sm">Mark All Present</button>
-        <button onClick={handleSave} disabled={saving} className="px-5 py-2 bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-slate-950 font-semibold rounded-lg flex items-center gap-2">{saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save</button>
+        <button onClick={() => markAll('Present')} className="w-full sm:w-auto px-4 py-2 bg-emerald-500/10 text-emerald-400 border-emerald-500/30 rounded-lg text-sm">Mark All Present</button>
+        <button onClick={handleSave} disabled={saving} className="w-full sm:w-auto justify-center px-5 py-2 bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-slate-950 font-semibold rounded-lg flex items-center gap-2">{saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save</button>
       </div>
 
-      <div className="rounded-xl bg-slate-900/70 border-slate-800/80 overflow-hidden">
+      <div className="rounded-xl bg-slate-900/70 border-slate-800/80 overflow-x-auto">
         {loading ? <TableSkeleton rows={6} cols={4} /> : (
-          <table className="w-full text-left text-sm text-slate-300">
+          <table className="w-full min-w-[600px] text-left text-sm text-slate-300">
             <thead className="bg-slate-950/60 font-mono text-xs uppercase text-slate-400 border-b border-slate-800">
               <tr><th className="p-4">S/N</th><th className="p-4">Student Name</th><th className="p-4">Status</th><th className="p-4 text-right">Action</th></tr>
             </thead>

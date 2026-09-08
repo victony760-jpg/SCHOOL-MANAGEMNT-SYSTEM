@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { GraduationCap, Mail, Lock, Eye, EyeOff, Loader2, ShieldCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { adminLogin } from '../services/api';
-import { useAuth } from '../context/AuthContext'; // 1. IMPORT CONTEXT
+import { useAuth } from '../hooks/useAuth'; // 1. IMPORT CONTEXT
 import { toast } from 'sonner';
 import loginVideo from '../assets/13342680_3840_2160_30fps.mp4';
 import loginImage from '../assets/pexels-expressivestanley-1454360.jpg';

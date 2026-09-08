@@ -9,6 +9,7 @@ const submissionSchema = new mongoose.Schema(
     },
     fullName: { type: String, required: true },
     email: { type: String, required: true },
+    subject: { type: String },
     phone: { type: String },
     message: { type: String },
     status: {

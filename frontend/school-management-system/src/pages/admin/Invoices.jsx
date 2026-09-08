@@ -145,9 +145,9 @@ const AdminInvoices = () => {
       </div>
 
       {/* TABLE */}
-      <div className="rounded-xl bg-slate-900/70 dark:bg-slate-900/70 light:bg-white border border-slate-800/80 dark:border-slate-800/80 light:border-slate-200 backdrop-blur-xl overflow-hidden">
+      <div className="rounded-xl bg-slate-900/70 dark:bg-slate-900/70 light:bg-white border border-slate-800/80 dark:border-slate-800/80 light:border-slate-200 backdrop-blur-xl overflow-x-auto">
         {loading ? <TableSkeleton rows={5} cols={6} /> : (
-          <table className="w-full text-left text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">
+          <table className="w-full min-w-225 text-left text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">
             <thead className="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-50 font-mono text-xs uppercase text-slate-400 border-b border-slate-800">
               <tr>
                 <th className="p-4">Invoice ID</th><th className="p-4">Student</th><th className="p-4">Class</th>
@@ -158,16 +158,16 @@ const AdminInvoices = () => {
               {filteredInvoices.length === 0 ? <tr><td colSpan="6" className="p-12 text-center text-slate-400">No invoices found</td></tr> :
                 filteredInvoices.map((inv) => (
                   <tr key={inv._id} className="hover:bg-slate-800/30">
-                    <td className="p-4 font-mono text-amber-400">{inv.invoiceNumber}</td>
-                    <td className="p-4 font-medium text-white dark:text-white light:text-slate-900">{inv.student?.fullName || 'Unknown student'}</td>
-                    <td className="p-4 text-slate-400">{inv.student?.classAssigned?.fullClassName || 'Unassigned'}</td>
-                    <td className="p-4 font-mono text-white">₦{inv.amount.toLocaleString()}</td>
+                    <td className="p-4 font-mono text-amber-400 whitespace-nowrap">{inv.invoiceNumber}</td>
+                    <td className="p-4 font-medium text-white dark:text-white light:text-slate-900 whitespace-nowrap">{inv.student?.fullName || 'Unknown student'}</td>
+                    <td className="p-4 text-slate-400 whitespace-nowrap">{inv.student?.classAssigned?.fullClassName || 'Unassigned'}</td>
+                    <td className="p-4 font-mono text-white whitespace-nowrap">₦{inv.amount.toLocaleString()}</td>
                     <td className="p-4">
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${inv.status === 'Paid' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/10 text-amber-400 border-amber-500/30'
                         } border`}>{inv.status}</span>
                     </td>
                     <td className="p-4 text-right">
-                      <div className="flex justify-end gap-3">
+                      <div className="flex min-w-35 justify-end gap-3 whitespace-nowrap">
                         <button onClick={() => downloadPDF(inv)} className="text-xs text-emerald-400 hover:underline font-mono flex items-center gap-1"><Download className="w-3 h-3" /> PDF</button>
                         <button onClick={() => handleDelete(inv._id)} className="text-xs text-rose-400 hover:underline font-mono">Delete</button>
                       </div>

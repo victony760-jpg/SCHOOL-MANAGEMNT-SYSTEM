@@ -154,7 +154,7 @@ const AdminStudents = () => {
       <section className="px-6 max-w-7xl mx-auto pb-10">
         <motion.div className="bg-blue-900/20 border-blue-900/60 rounded-xl overflow-x-auto">
           {loading ? <div className="flex justify-center p-10"><Loader2 className="animate-spin text-emerald-400" /></div> : (
-            <table className="w-full text-left">
+            <table className="w-full min-w-225 text-left">
               <thead className="border-b border-blue-900/60 bg-blue-900/20">
                 <tr className="text-slate-400 text-xs">
                   <th className="p-4 font-mono uppercase">Student</th>
@@ -188,23 +188,23 @@ const AdminStudents = () => {
                     <td className="p-4 text-sm">{s.parentName}<p className="text-xs text-slate-400">{s.parentPhone}</p></td>
                     <td className="p-4">{getStatusBadge(s.admissionStatus, s.user?.isActive)}</td>
                     <td className="p-4">
-                      <div className="flex gap-2 justify-end">
+                      <div className="flex min-w-55 gap-2 justify-end">
                         {s.admissionStatus === 'pending' && (
                           <>
-                            <button onClick={() => handleApprove(s._id)} disabled={actionId === s._id} className="p-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg">
+                            <button title="Approve" onClick={() => handleApprove(s._id)} disabled={actionId === s._id} className="w-10 h-10 shrink-0 flex items-center justify-center bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg">
                               {actionId === s._id ? <Loader2 size={14} className="animate-spin text-emerald-400" /> : <CheckCircle size={14} className="text-emerald-400" />}
                             </button>
-                            <button onClick={() => handleReject(s._id)} disabled={actionId === s._id} className="p-2 bg-rose-500/10 hover:bg-rose-500/20 rounded-lg">
+                            <button title="Reject" onClick={() => handleReject(s._id)} disabled={actionId === s._id} className="w-10 h-10 shrink-0 flex items-center justify-center bg-rose-500/10 hover:bg-rose-500/20 rounded-lg">
                               <XCircle size={14} className="text-rose-400" />
                             </button>
                           </>
                         )}
-                        <button onClick={() => handleToggleActive(s.user?._id, s.user?.isActive)} disabled={actionId === s.user?._id} className="p-2 bg-amber-500/10 hover:bg-amber-500/20 rounded-lg">
+                        <button title={s.user?.isActive ? 'Deactivate' : 'Activate'} onClick={() => handleToggleActive(s.user?._id, s.user?.isActive)} disabled={actionId === s.user?._id} className="w-10 h-10 shrink-0 flex items-center justify-center bg-amber-500/10 hover:bg-amber-500/20 rounded-lg">
                           {s.user?.isActive ? <ShieldOff size={14} className="text-amber-400" /> : <Shield size={14} className="text-emerald-400" />}
                         </button>
-                        <button onClick={() => setEditingStudent(s)} className="p-2 bg-blue-500/10 hover:bg-blue-500/20 rounded-lg"><Edit size={14} className="text-blue-400" /></button>
-                        <button onClick={() => handlePromote(s._id)} className="p-2 bg-amber-500/10 hover:bg-amber-500/20 rounded-lg"><TrendingUp size={14} className="text-amber-400" /></button>
-                        <button onClick={() => handleDelete(s._id, s.fullName)} className="p-2 bg-rose-500/10 hover:bg-rose-500/20 rounded-lg"><Trash2 size={14} className="text-rose-400" /></button>
+                        <button title="Edit" onClick={() => setEditingStudent(s)} className="w-10 h-10 shrink-0 flex items-center justify-center bg-blue-500/10 hover:bg-blue-500/20 rounded-lg"><Edit size={14} className="text-blue-400" /></button>
+                        <button title="Promote" onClick={() => handlePromote(s._id)} className="w-10 h-10 shrink-0 flex items-center justify-center bg-amber-500/10 hover:bg-amber-500/20 rounded-lg"><TrendingUp size={14} className="text-amber-400" /></button>
+                        <button title="Delete" onClick={() => handleDelete(s._id, s.fullName)} className="w-10 h-10 shrink-0 flex items-center justify-center bg-rose-500/10 hover:bg-rose-500/20 rounded-lg"><Trash2 size={14} className="text-rose-400" /></button>
                       </div>
                     </td>
                   </tr>

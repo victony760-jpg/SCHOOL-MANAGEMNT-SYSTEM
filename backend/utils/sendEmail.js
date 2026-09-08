@@ -22,6 +22,7 @@ const sendEmail = async (options) => {
   const mailOptions = {
     from: `"Victony School" <${emailUser}>`,
     to: options.to,
+    replyTo: options.replyTo,
     subject: options.subject,
     html: options.html,
   };

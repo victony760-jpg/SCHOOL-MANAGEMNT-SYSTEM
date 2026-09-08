@@ -62,7 +62,7 @@ const StudentInvoices = () => {
   const totalDue = invoices.filter(i => i.status === 'Pending').reduce((sum, i) => sum + i.amount, 0);
 
   return (
-    <main className="bg-blue-950 text-slate-100 min-h-screen p-6">
+    <main className="bg-blue-950 text-slate-100 min-h-screen p-4 sm:p-6">
       <div className="max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
           <span className="text-emerald-400 font-mono tracking-widest uppercase text-xs">Student Portal</span>
@@ -83,28 +83,28 @@ const StudentInvoices = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="bg-blue-900/20 border border-blue-900/60 rounded-xl p-5"
+              className="min-w-0 bg-blue-900/20 border border-blue-900/60 rounded-xl p-4 sm:p-5"
             >
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                  <p className="font-mono text-amber-400 text-sm">{inv.invoiceNumber}</p>
-                  <p className="font-semibold text-white">{inv.description}</p>
-                  <p className="text-sm text-slate-400">Class: {inv.student?.classAssigned?.fullClassName || 'Not assigned'}</p>
+                <div className="min-w-0">
+                  <p className="font-mono text-amber-400 text-sm break-all">{inv.invoiceNumber}</p>
+                  <p className="font-semibold text-white break-words">{inv.description}</p>
+                  <p className="text-sm text-slate-400 break-words">Class: {inv.student?.classAssigned?.fullClassName || 'Not assigned'}</p>
                   <p className="text-lg font-bold text-white mt-1">₦{inv.amount.toLocaleString()}</p>
                   <p className="text-xs text-slate-400">Due: {new Date(inv.dueDate).toLocaleDateString()}</p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex w-full sm:w-auto flex-wrap items-center gap-3">
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${inv.status === 'Paid' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/10 text-amber-400 border-amber-500/30'}`}>
                     {inv.status}
                   </span>
-                  <button onClick={() => downloadPDF(inv)} className="p-2 hover:bg-blue-900/40 rounded-lg">
+                  <button title="Download invoice" onClick={() => downloadPDF(inv)} className="w-10 h-10 shrink-0 flex items-center justify-center hover:bg-blue-900/40 rounded-lg">
                     <Download size={16} />
                   </button>
                   {inv.status === 'Pending' && (
                     <button
                       onClick={() => handlePay(inv._id)}
                       disabled={payingId === inv._id}
-                      className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold rounded-lg flex items-center gap-2 disabled:opacity-50 transition"
+                      className="px-5 py-2.5 min-h-10 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold rounded-lg flex items-center gap-2 disabled:opacity-50 transition"
                     >
                       {payingId === inv._id ? <Loader2 size={16} className="animate-spin" /> : <CreditCard size={16} />}
                       Pay Now

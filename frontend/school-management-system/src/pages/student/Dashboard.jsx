@@ -54,11 +54,11 @@ const StudentDashboard = () => {
 
   return (
     <div className="space-y-8">
-      <motion.div className="p-8 rounded-2xl bg-linear-to-r from-slate-900 to-emerald-950/40 border-slate-800/80">
+      <motion.div className="p-5 sm:p-8 rounded-2xl bg-linear-to-r from-slate-900 to-emerald-950/40 border-slate-800/80">
         <span className="text-emerald-400 text-xs font-mono uppercase">{student.term}</span>
-        <div className="flex items-center gap-4 mt-2">
-          <div className="w-16 h-16 rounded-full overflow-hidden bg-emerald-500/20">{student.photoUrl ? <img src={student.photoUrl} alt="Student" className="w-full h-full object-cover" /> : <Camera className="w-6 h-6 text-emerald-400 m-4" />}</div>
-          <div><h1 className="text-3xl font-serif font-bold text-white">Welcome back, {student.name}</h1></div>
+        <div className="flex min-w-0 items-center gap-3 sm:gap-4 mt-2">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-full overflow-hidden bg-emerald-500/20 flex items-center justify-center">{student.photoUrl ? <img src={student.photoUrl} alt="Student" className="w-full h-full object-cover" /> : <Camera className="w-6 h-6 text-emerald-400" />}</div>
+          <div className="min-w-0"><h1 className="text-2xl sm:text-3xl font-serif font-bold text-white break-words">Welcome back, {student.name}</h1></div>
         </div>
         <p className="text-slate-400 text-sm mt-2">Class: {student.class} | Attendance: {student.attendanceRate}%</p>
         <Link to="/student/invoices" className="inline-flex mt-3 text-emerald-400 hover:text-emerald-300 text-sm font-semibold">Fee status: {student.feeStatus || 'Pending'} · View invoices</Link>

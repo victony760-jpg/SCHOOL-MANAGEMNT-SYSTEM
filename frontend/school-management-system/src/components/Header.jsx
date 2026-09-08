@@ -1,5 +1,5 @@
 // src/components/common/Header.jsx
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import { motion } from 'framer-motion';
 
 const Header = ({ toggleSidebar }) => {

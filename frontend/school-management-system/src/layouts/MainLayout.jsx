@@ -7,7 +7,7 @@ import {
   LogOut, Menu, X, Bell, User, School, Megaphone, Users,
   ClipboardList, UserRoundCheck
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext'; // your auth
+import { useAuth } from '../hooks/useAuth'; // your auth
 
 const adminMenu = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },

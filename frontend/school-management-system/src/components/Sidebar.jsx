@@ -1,6 +1,6 @@
 // src/components/common/Sidebar.jsx
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import { studentNav, adminNav } from '../config/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
