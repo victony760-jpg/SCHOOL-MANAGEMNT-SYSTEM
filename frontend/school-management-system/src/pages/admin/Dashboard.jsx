@@ -54,11 +54,11 @@ const AdminDashboard = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <Link to="/admin/attendance" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-emerald-500/30 text-center"><CalendarDays className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Attendance</p></Link>
-        <Link to="/admin/grades" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-emerald-500/30 text-center"><BookOpen className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Grades</p></Link>
-        <Link to="/admin/invoices" className="p-4 rounded-lg bg-slate-900/70 border-slate-800/80 hover:border-emerald-500/30 text-center"><Receipt className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Bursary</p></Link>
-        <Link to="/admin/admissions" className="p-4 rounded-lg bg-slate-900/70 border-slate-800/80 hover:border-emerald-500/30 text-center"><FileText className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Admissions</p></Link>
-        <Link to="/admin/visits" className="p-4 rounded-lg bg-slate-900/70 border-slate-800/80 hover:border-emerald-500/30 text-center"><Calendar className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Visits</p></Link>
+        <Link to="/admin/attendance" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-slate-600 text-center"><CalendarDays className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Attendance</p></Link>
+        <Link to="/admin/grades" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-slate-600 text-center"><BookOpen className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Grades</p></Link>
+        <Link to="/admin/invoices" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-slate-600 text-center"><Receipt className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Bursary</p></Link>
+        <Link to="/admin/admissions" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-slate-600 text-center"><FileText className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Admissions</p></Link>
+        <Link to="/admin/visits" className="p-4 rounded-lg bg-slate-900/70 border border-slate-800/80 hover:border-slate-600 text-center"><Calendar className="w-6 h-6 mx-auto text-emerald-400" /><p className="text-sm mt-2 text-slate-300">Visits</p></Link>
       </div>
 
       <div className="rounded-xl bg-slate-900/70 border border-slate-800/80">

@@ -88,7 +88,7 @@ const Contact = () => {
         <h2 className="font-serif text-3xl font-bold text-white mb-4">Looking for Something Specific?</h2>
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
           <Link to="/admissions" className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold rounded-lg transition">Admissions</Link>
-          <Link to="/campus-life" className="px-6 py-3 bg-blue-900/60 hover:bg-blue-800/80 text-white border-blue-700/60 rounded-lg transition">Campus Tour</Link>
+          <Link to="/campus-life" className="px-6 py-3 bg-blue-900/60 hover:bg-blue-800/80 text-white border border-slate-600 rounded-lg transition">Campus Tour</Link>
         </div>
       </section>
     </main >

@@ -1,4 +1,4 @@
-// src/components/common/Sidebar.jsx
+
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { studentNav, adminNav } from '../config/navigation';

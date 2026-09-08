@@ -37,6 +37,8 @@ const Home = () => {
   };
 
   const [heroMediaIndex, setHeroMediaIndex] = useState(0);
+  const [heroFallbackSrc, setHeroFallbackSrc] = useState(heroMediaSequence[0].src);
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
   const heroVideoRef = useRef(null);
   const campusVideoRef = useRef(null);
 
@@ -46,6 +48,7 @@ const Home = () => {
     if (activeMedia.type === 'video') {
       const video = heroVideoRef.current;
       if (!video) return;
+      setHeroVideoReady(false);
 
       const playVideo = async () => {
         try {
@@ -59,6 +62,9 @@ const Home = () => {
       playVideo();
       return;
     }
+
+    setHeroFallbackSrc(activeMedia.src);
+    setHeroVideoReady(false);
 
     const timer = window.setTimeout(() => {
       setHeroMediaIndex((prevIndex) => (prevIndex + 1) % heroMediaSequence.length);
@@ -88,26 +94,25 @@ const Home = () => {
 
       {/* 1. HERO VIDEO SECTION */}
       <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-        {heroMediaSequence[heroMediaIndex].type === 'video' ? (
+        <img
+          data-hero-image
+          src={heroFallbackSrc}
+          alt="Victony campus"
+          className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-1000 ${heroMediaSequence[heroMediaIndex].type === 'video' && heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+        />
+        {heroMediaSequence[heroMediaIndex].type === 'video' && (
           <video
             ref={heroVideoRef}
-            key="hero-video-loop"
             src={heroMediaSequence[heroMediaIndex].src}
             autoPlay
             muted
             playsInline
+            onCanPlay={() => setHeroVideoReady(true)}
             onEnded={() => setHeroMediaIndex((prevIndex) => (prevIndex + 1) % heroMediaSequence.length)}
-            className="absolute inset-0 w-full h-full object-cover scale-105"
+            className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-1000 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
           >
             Your browser does not support the video tag.
           </video>
-        ) : (
-          <img
-            data-hero-image
-            src={heroMediaSequence[heroMediaIndex].src}
-            alt="Victony campus"
-            className="absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-700"
-          />
         )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-blue-950 via-blue-950/50 to-blue-950/80" />
@@ -508,13 +513,13 @@ const Home = () => {
           </p>
 
           {/* ACTION BUTTONS: INQUIRIES, APPLY, TOUR */}
-          <div className="pt-6 flex-col sm:flex-row gap-5 justify-center items-center">
+          <div className="pt-6 flex flex-col sm:flex-row gap-5 justify-center items-center">
 
             {/* Make Inquiries */}
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-block border-2 border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-blue-950 font-bold px-8 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 shadow-md"
+                className="w-full sm:w-auto inline-block border border-emerald-400 text-emerald-400 hover:bg-emerald-400 hover:text-blue-950 font-bold px-8 py-4 rounded-sm text-sm tracking-widest uppercase transition-colors duration-300"
               >
                 Make Inquiries
               </Link>
@@ -524,7 +529,7 @@ const Home = () => {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link
                 to="/admissions"
-                className="w-full sm:w-auto inline-block bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold px-9 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 shadow-xl shadow-emerald-500/20"
+                className="w-full sm:w-auto inline-block bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold px-9 py-4 rounded-sm text-sm tracking-widest uppercase transition-colors duration-300"
               >
                 Apply Now
               </Link>
@@ -534,7 +539,7 @@ const Home = () => {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto">
               <Link
                 to="/campus-tour"
-                className="w-full sm:w-auto inline-block bg-blue-900/60 hover:bg-blue-800/80 text-white border border-blue-700/60 px-8 py-4 rounded-sm text-sm tracking-widest uppercase transition-all duration-300 shadow-md"
+                className="w-full sm:w-auto inline-block bg-blue-900/60 hover:bg-blue-800/80 text-white border border-slate-600 px-8 py-4 rounded-sm text-sm tracking-widest uppercase transition-colors duration-300"
               >
                 Book A Tour
               </Link>

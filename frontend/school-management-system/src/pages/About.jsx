@@ -168,8 +168,8 @@ const About = () => {
           <h2 className="text-4xl sm:text-5xl font-serif font-bold text-white tracking-wide">JOIN THE VICTONY COMMUNITY</h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto font-light">Whether you are a prospective student, parent, or educator, we invite you to experience our campus firsthand.</p>
           <div className="pt-6 flex flex-col sm:flex-row gap-5 justify-center">
-            <Link to="/admissions" className="inline-block bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold px-9 py-4 rounded-lg text-sm tracking-widest uppercase transition shadow-xl shadow-emerald-500/20">Apply for Admission</Link>
-            <button onClick={() => setShowVisitModal(true)} className="inline-block bg-blue-900/60 hover:bg-blue-800/80 text-white border border-blue-700/60 px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition">Schedule A Visit</button>
+            <Link to="/admissions" className="inline-block bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold px-9 py-4 rounded-lg text-sm tracking-widest uppercase transition">Apply for Admission</Link>
+            <button onClick={() => setShowVisitModal(true)} className="inline-block bg-blue-900/60 hover:bg-blue-800/80 text-white border border-slate-600 px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition">Schedule A Visit</button>
           </div>
         </motion.div>
       </section>

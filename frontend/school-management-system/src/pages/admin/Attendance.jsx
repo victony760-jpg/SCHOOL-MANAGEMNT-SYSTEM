@@ -105,7 +105,7 @@ const AdminAttendance = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="relative flex-1"><Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" /><input placeholder="Search student..." value={search} onChange={(e) => setSearch(e.target.value)} className="bg-slate-900/50 border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm w-full" /></div>
-        <button onClick={() => markAll('Present')} className="w-full sm:w-auto px-4 py-2 bg-emerald-500/10 text-emerald-400 border-emerald-500/30 rounded-lg text-sm">Mark All Present</button>
+        <button onClick={() => markAll('Present')} className="w-full sm:w-auto px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-slate-600 rounded-lg text-sm">Mark All Present</button>
         <button onClick={handleSave} disabled={saving} className="w-full sm:w-auto justify-center px-5 py-2 bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-slate-950 font-semibold rounded-lg flex items-center gap-2">{saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Save</button>
       </div>
 

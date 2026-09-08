@@ -1,4 +1,4 @@
-// src/components/common/StatCard.jsx
+
 import { motion } from 'framer-motion';
 
 const StatCard = ({
@@ -42,8 +42,8 @@ const StatCard = ({
         {change && (
           <span
             className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide border ${isPositive
-                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+              : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
               }`}
           >
             {isPositive ? (

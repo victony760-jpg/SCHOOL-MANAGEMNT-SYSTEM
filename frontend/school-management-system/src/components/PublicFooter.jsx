@@ -45,7 +45,7 @@ const Footer = () => {
 
             <p className="text-slate-400 font-sans text-sm leading-relaxed">
               Nurturing excellence, character, and leadership for the next generation of victors.
-              Est. 2010 in Lagos, Nigeria.
+              Est. 2015 in Lagos ikeja, Nigeria.
             </p>
 
             {/* Contact Info */}

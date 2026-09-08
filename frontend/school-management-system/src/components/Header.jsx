@@ -1,4 +1,4 @@
-// src/components/common/Header.jsx
+
 import { useAuth } from '../hooks/useAuth';
 import { motion } from 'framer-motion';
 
@@ -19,7 +19,7 @@ const Header = ({ toggleSidebar }) => {
         {/* Hamburger - Same as Navbar Menu Button */}
         <button
           onClick={toggleSidebar}
-          className="p-2 w-10 h-10 rounded-full text-blue-950 bg-emerald-500 hover:bg-emerald-400 lg:hidden flex items-center justify-center shadow-lg shadow-emerald-500/20 transition-all duration-300"
+          className="p-2 w-10 h-10 rounded-full text-blue-950 bg-emerald-500 hover:bg-emerald-400 lg:hidden flex items-center justify-center transition-colors duration-300"
           aria-label="Open Navigation Menu"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,7 +48,7 @@ const Header = ({ toggleSidebar }) => {
         {/* Notifications - Same circle button as Navbar */}
         <motion.button
           whileTap={{ scale: 0.9 }}
-          className="relative w-10 h-10 rounded-full flex items-center justify-center text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300"
+          className="relative w-10 h-10 rounded-full flex items-center justify-center text-emerald-400 bg-emerald-500/10 border border-slate-700 hover:bg-emerald-500/20 hover:border-slate-500 transition-colors duration-300"
           aria-label="Notifications"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

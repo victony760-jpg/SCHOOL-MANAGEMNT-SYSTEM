@@ -174,7 +174,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-slate-950 py-3.5 rounded-lg font-bold hover:from-emerald-400 hover:to-emerald-500 transition disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+              className="w-full bg-emerald-500 text-slate-950 py-3.5 rounded-lg font-bold hover:bg-emerald-400 transition disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Sign In'}
             </button>
