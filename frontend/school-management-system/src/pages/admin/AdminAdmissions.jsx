@@ -24,8 +24,12 @@ const AdminAdmissions = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await api.patch(`/admissions/${id}/status`, { status });
-      toast.success(`Application ${status}`);
+      const response = await api.patch(`/admissions/${id}/status`, { status });
+      if (response.data?.data?.emailSent === false) {
+        toast.warning(`Application ${status}, but the email could not be sent. Check the backend email settings.`);
+      } else {
+        toast.success(`Application ${status}`);
+      }
       fetchApplications();
     } catch (err) {
       toast.error(err.response?.data?.message || `Failed to ${status.toLowerCase()}`)

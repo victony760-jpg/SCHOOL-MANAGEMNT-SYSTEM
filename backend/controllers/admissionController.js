@@ -90,6 +90,8 @@ export const updateAdmissionStatus = async (req, res) => {
 
     if (!submission) return error(res, "Application not found", 404);
 
+    let emailSent = true;
+
     if (status === "Approved" && submission.status !== "Approved") {
       const existingProfile = await StudentProfile.findOne({
         $or: [
@@ -139,6 +141,7 @@ export const updateAdmissionStatus = async (req, res) => {
             html: `<p>Congratulations ${submission.fullName}.</p><p>Your student ID is <b>${studentID}</b>.</p><p>Your temporary password is <b>${temporaryPassword}</b>.</p><p>Use the student ID to log in, then change your password.</p>`,
           });
         } catch (emailError) {
+          emailSent = false;
           console.error("Admission email failed:", emailError.message);
         }
       }
@@ -147,7 +150,13 @@ export const updateAdmissionStatus = async (req, res) => {
     submission.status = status;
     await submission.save();
     await submission.populate("classApplying", "fullClassName");
-    return success(res, submission, `Status updated to ${status}`);
+    return success(
+      res,
+      { submission, emailSent },
+      emailSent
+        ? `Status updated to ${status}`
+        : `Status updated to ${status}, but the email could not be sent`,
+    );
   } catch (err) {
     return error(res, err.message);
   }
