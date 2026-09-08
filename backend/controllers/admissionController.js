@@ -68,7 +68,9 @@ export const submitAdmission = async (req, res) => {
       message,
       status: "Pending",
       applicantPhoto: photoUpload?.url || null,
+      applicantPhotoPath: photoUpload?.path || null,
       documents: documentUpload?.url || null,
+      documentsPath: documentUpload?.path || null,
     });
     return success(
       res,
@@ -89,12 +91,28 @@ export const getAdmissions = async (req, res) => {
     const admissions = await Promise.all(
       submissions.map(async (submission) => {
         const data = submission.toObject();
-        data.applicantPhoto = data.applicantPhoto
-          ? await createSignedFileUrl(data.applicantPhoto)
-          : null;
-        data.documents = data.documents
-          ? await createSignedFileUrl(data.documents)
-          : null;
+        try {
+          data.applicantPhoto = data.applicantPhoto
+            ? await createSignedFileUrl(
+                data.applicantPhoto,
+                3600,
+                data.applicantPhotoPath,
+              )
+            : null;
+        } catch (fileError) {
+          console.error("Admission photo URL failed:", fileError.message);
+        }
+        try {
+          data.documents = data.documents
+            ? await createSignedFileUrl(
+                data.documents,
+                3600,
+                data.documentsPath,
+              )
+            : null;
+        } catch (fileError) {
+          console.error("Admission document URL failed:", fileError.message);
+        }
         return data;
       }),
     );
@@ -162,6 +180,7 @@ export const updateAdmissionStatus = async (req, res) => {
             parentEmail: submission.email,
             parentPhone: submission.phone || "Not provided",
             photoUrl: submission.applicantPhoto || null,
+            storagePath: submission.applicantPhotoPath || null,
             admissionStatus: "approved",
           });
           user.studentProfile = profile._id;

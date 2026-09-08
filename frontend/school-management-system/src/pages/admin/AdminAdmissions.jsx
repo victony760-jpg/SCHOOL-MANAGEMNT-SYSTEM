@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, XCircle, Loader2, Eye } from 'lucide-react';
+import { CheckCircle, XCircle, Loader2, Send } from 'lucide-react';
 import { toast } from 'sonner';
-import api, { deleteAdmission } from '../../services/api';
+import api, { deleteAdmission, updateAdmissionStatus } from '../../services/api';
 
 const AdminAdmissions = () => {
   const [loading, setLoading] = useState(true);
+  const [updatingId, setUpdatingId] = useState(null);
   const [applications, setApplications] = useState([]);
 
   useEffect(() => { fetchApplications(); }, []);
@@ -23,9 +24,11 @@ const AdminAdmissions = () => {
   };
 
   const updateStatus = async (id, status) => {
+    if (updatingId) return;
+    setUpdatingId(id);
     try {
-      const response = await api.patch(`/admissions/${id}/status`, { status });
-      if (response.data?.data?.emailSent === false) {
+      const response = await updateAdmissionStatus(id, status);
+      if (response.data?.emailSent === false) {
         toast.warning(`Application ${status}, but the email could not be sent. Check the backend email settings.`);
       } else {
         toast.success(`Application ${status}`);
@@ -37,6 +40,8 @@ const AdminAdmissions = () => {
           ? 'Approval is taking too long. Check the student status before trying again.'
           : err.response?.data?.message || `Failed to ${status.toLowerCase()}`,
       );
+    } finally {
+      setUpdatingId(null);
     }
   }
 
@@ -103,13 +108,18 @@ const AdminAdmissions = () => {
                     <div className="flex gap-2 justify-end min-w-37.5">
                       {(!app.status || app.status === "New" || app.status === "Pending") && (
                         <>
-                          <button onClick={() => updateStatus(app._id, 'Approved')} className="p-2 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg" title="Approve">
-                            <CheckCircle className="w-4 h-4 text-emerald-400" />
+                          <button disabled={updatingId === app._id} onClick={() => updateStatus(app._id, 'Approved')} className="p-2 bg-emerald-500/10 hover:bg-emerald-500/20 disabled:opacity-50 rounded-lg" title="Approve">
+                            {updatingId === app._id ? <Loader2 className="w-4 h-4 animate-spin text-emerald-400" /> : <CheckCircle className="w-4 h-4 text-emerald-400" />}
                           </button>
                           <button onClick={() => updateStatus(app._id, 'Rejected')} className="p-2 bg-rose-500/10 hover:bg-rose-500/20 rounded-lg" title="Reject">
                             <XCircle className="w-4 h-4 text-rose-400" />
                           </button>
                         </>
+                      )}
+                      {app.status === "Approved" && (
+                        <button disabled={updatingId === app._id} onClick={() => updateStatus(app._id, 'Approved')} className="p-2 bg-blue-500/10 hover:bg-blue-500/20 disabled:opacity-50 rounded-lg" title="Resend login details">
+                          {updatingId === app._id ? <Loader2 className="w-4 h-4 animate-spin text-blue-400" /> : <Send className="w-4 h-4 text-blue-400" />}
+                        </button>
                       )}
                       <button onClick={() => handleDelete(app._id)} className="p-2 text-xs text-rose-400 hover:bg-rose-500/10 rounded-lg" title="Delete">Delete</button>
                     </div>

@@ -8,6 +8,7 @@ import {
   uploadToSupabase,
   deleteFile,
   extractPathFromUrl,
+  createSignedFileUrl,
 } from "../middleware/upload.js";
 import sendEmail from "../utils/sendEmail.js";
 import { success } from "../utils/response.js"; // <- standardized response
@@ -179,8 +180,26 @@ export const getStudents = async (req, res, next) => {
 
   const total = await StudentProfile.countDocuments(query);
 
+  const serializedStudents = await Promise.all(
+    students.map(async (student) => {
+      const data = student.toObject();
+      if (data.photoUrl) {
+        try {
+          data.photoUrl = await createSignedFileUrl(
+            data.photoUrl,
+            3600,
+            data.storagePath,
+          );
+        } catch (photoError) {
+          console.error("Student photo URL failed:", photoError.message);
+        }
+      }
+      return data;
+    }),
+  );
+
   return success(res, {
-    students,
+    students: serializedStudents,
     pagination: { total, page, pages: Math.ceil(total / limit) },
   });
 };

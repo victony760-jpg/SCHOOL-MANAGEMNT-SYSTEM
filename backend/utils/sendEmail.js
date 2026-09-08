@@ -16,6 +16,9 @@ const sendEmail = async (options) => {
       user: emailUser,
       pass: emailPass,
     },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
   });
 
   // 2. Define email options

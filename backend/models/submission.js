@@ -37,7 +37,9 @@ const submissionSchema = new mongoose.Schema(
     gender: { type: String, enum: ["Male", "Female", "Other"] },
     previousSchool: { type: String },
     applicantPhoto: { type: String },
+    applicantPhotoPath: { type: String },
     documents: { type: String },
+    documentsPath: { type: String },
 
     // Visit specific
     visitDate: { type: Date },
