@@ -38,6 +38,7 @@ const Admissions = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
     if (!formData.fullName || !formData.parentName || !formData.email || !formData.dob || !formData.classApplying) {

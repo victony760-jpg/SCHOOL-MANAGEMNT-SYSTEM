@@ -29,6 +29,21 @@ export const submitAdmission = async (req, res) => {
     const classExists = await Class.findById(classApplying);
     if (!classExists) return error(res, "Class not found", 400);
 
+    const duplicateApplication = await Submission.findOne({
+      type: "admission",
+      email: email.trim().toLowerCase(),
+      dob: new Date(dob),
+      classApplying,
+      status: { $in: ["Pending", "Approved"] },
+    });
+    if (duplicateApplication) {
+      return error(
+        res,
+        "An admission application for this student is already on file.",
+        409,
+      );
+    }
+
     const applicantPhoto = req.files?.applicantPhoto?.[0];
     const documentFile = req.files?.documents?.[0];
     const [photoUpload, documentUpload] = await Promise.all([
@@ -92,16 +107,26 @@ export const updateAdmissionStatus = async (req, res) => {
 
     let emailSent = true;
 
-    if (status === "Approved" && submission.status !== "Approved") {
+    if (status === "Approved") {
       const existingProfile = await StudentProfile.findOne({
         $or: [
           { parentEmail: submission.email },
           { fullName: submission.fullName, dob: submission.dob },
         ],
       });
-      if (!existingProfile) {
-        const studentID = await generateStudentId();
-        const temporaryPassword = crypto.randomBytes(5).toString("hex");
+      let studentID;
+      let temporaryPassword;
+      let user;
+      if (existingProfile) {
+        user = await User.findById(existingProfile.user);
+        studentID = existingProfile.studentID;
+      } else {
+        studentID = await generateStudentId();
+        user = null;
+      }
+
+      temporaryPassword = crypto.randomBytes(5).toString("hex");
+      if (!user) {
         const studentEmail = `${studentID.toLowerCase()}@school.internal`;
         let user;
         let profile;
@@ -134,16 +159,22 @@ export const updateAdmissionStatus = async (req, res) => {
           if (user?._id) await User.findByIdAndDelete(user._id);
           throw creationError;
         }
-        try {
-          await sendEmail({
-            to: submission.email,
-            subject: "Admission Approved - Victony International Academy",
-            html: `<p>Congratulations ${submission.fullName}.</p><p>Your student ID is <b>${studentID}</b>.</p><p>Your temporary password is <b>${temporaryPassword}</b>.</p><p>Use the student ID to log in, then change your password.</p>`,
-          });
-        } catch (emailError) {
-          emailSent = false;
-          console.error("Admission email failed:", emailError.message);
-        }
+        user = await User.findById(profile.user);
+      } else {
+        user.password = temporaryPassword;
+        user.mustChangePassword = true;
+        await user.save();
+      }
+
+      try {
+        await sendEmail({
+          to: submission.email,
+          subject: "Admission Approved - Victony International Academy",
+          html: `<p>Congratulations ${submission.fullName}.</p><p>Your student ID is <b>${studentID}</b>.</p><p>Your temporary password is <b>${temporaryPassword}</b>.</p><p>Use the student ID to log in, then change your password.</p>`,
+        });
+      } catch (emailError) {
+        emailSent = false;
+        console.error("Admission email failed:", emailError.message);
       }
     }
 
