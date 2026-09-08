@@ -95,7 +95,7 @@ const Navbar = () => {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setMobileMenuOpen(true)}
-              className={`relative z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg bg-emerald-500 hover:bg-emerald-400 text-blue-950`}
+              className={`relative z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 bg-emerald-500 hover:bg-emerald-400 text-blue-950`}
               aria-label="Open Navigation Menu"
             >
               <div className="grid grid-cols-3 gap-1">
@@ -126,7 +126,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => setMobileMenuOpen(false)}
               // KEY FIX: pt-[env(safe-area-inset-top)] + right-4 for spacing
-              className="absolute top-0 right-4 pt-[env(safe-area-inset-top)] mt-4 z-20 w-12 h-12 rounded-full flex items-center justify-center bg-emerald-400 text-blue-950 shadow-lg shadow-emerald-400/30"
+              className="absolute top-0 right-4 pt-[env(safe-area-inset-top)] mt-4 z-20 w-12 h-12 rounded-full flex items-center justify-center bg-emerald-400 text-blue-950"
               aria-label="Close Navigation Menu"
             >
               {/* CENTERED X USING FLEX */}

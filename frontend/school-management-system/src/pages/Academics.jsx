@@ -141,7 +141,7 @@ const Academics = () => {
         <GraduationCap className="w-16 h-16 text-emerald-400 mx-auto mb-4" />
         <h2 className="font-serif text-3xl font-bold text-white mb-4">Ready to Join Victony?</h2>
         <p className="text-slate-300 mb-8 max-w-xl mx-auto text-sm sm:text-base">Admissions for 2026/2027 session is now open. Limited spaces available.</p>
-        <a href="/admissions" className="inline-block bg-emerald-500 text-slate-950 px-8 py-3.5 rounded-lg font-bold hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">Apply Now</a>
+        <a href="/admissions" className="inline-block bg-emerald-500 text-slate-950 px-8 py-3.5 rounded-lg font-bold hover:bg-emerald-400 transition">Apply Now</a>
       </section>
     </div>
   );

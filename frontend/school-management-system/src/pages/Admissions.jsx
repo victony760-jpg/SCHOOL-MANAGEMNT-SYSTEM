@@ -92,7 +92,7 @@ const Admissions = () => {
           <span className="text-emerald-400 font-serif tracking-[0.3em] uppercase text-xs font-semibold">2026/2027 Session</span>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white mt-3">Admissions</h1>
           <p className="text-slate-300 mt-4 max-w-2xl mx-auto">Join Victony International Academy. Applications are now open for all classes.</p>
-          <a href="#apply" className="inline-block mt-6 bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition shadow-lg shadow-emerald-500/20">Apply Now</a>
+          <a href="#apply" className="inline-block mt-6 bg-emerald-500 hover:bg-emerald-400 text-blue-950 font-bold px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition">Apply Now</a>
         </div>
       </section>
 
@@ -157,7 +157,7 @@ const Admissions = () => {
 
             <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Any Questions or Additional Information" rows="4" className={`${inputClass} resize-none`} />
 
-            <button type="submit" disabled={isSubmitting} className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-blue-950 font-bold px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+            <button type="submit" disabled={isSubmitting} className="w-full bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-blue-950 font-bold px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition flex items-center justify-center gap-2">
               {isSubmitting ? (<><Loader2 className="w-5 h-5 animate-spin" />Submitting...</>) : (<><Send className="w-5 h-5" />Submit Application</>)}
             </button>
           </form>

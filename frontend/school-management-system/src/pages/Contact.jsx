@@ -62,7 +62,7 @@ const Contact = () => {
               </div>
               <input name="subject" value={formData.subject} onChange={handleChange} placeholder="Subject" required className="w-full bg-blue-900/40 border-blue-900/60 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition" />
               <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Your Message" rows="6" required className="w-full bg-blue-900/40 border-blue-900/60 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition resize-none" />
-              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={loading} className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-blue-950 font-bold px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={loading} className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-500/50 text-blue-950 font-bold px-8 py-4 rounded-lg text-sm tracking-widest uppercase transition flex items-center justify-center gap-2">
                 {loading && <Loader2 className="w-4 h-4 animate-spin" />} Send Message
               </motion.button>
             </form>
