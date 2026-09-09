@@ -46,6 +46,10 @@ export const submitAdmission = async (req, res) => {
 
     const applicantPhoto = req.files?.applicantPhoto?.[0];
     const documentFile = req.files?.documents?.[0];
+    if (!applicantPhoto) {
+      return error(res, "Applicant photo upload is required", 400);
+    }
+
     const [photoUpload, documentUpload] = await Promise.all([
       applicantPhoto
         ? uploadToSupabase(applicantPhoto, "school-admissions/photos")

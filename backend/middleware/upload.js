@@ -52,6 +52,11 @@ export const uploadToSupabase = async (file, folder = "school-students") => {
   if (error) throw error;
 
   const { data } = supabase.storage.from(supabaseBucket).getPublicUrl(filePath);
+  if (!data?.publicUrl) {
+    throw new Error(
+      `Supabase upload completed without a file URL in bucket '${supabaseBucket}'`,
+    );
+  }
   return { url: data.publicUrl, path: filePath };
 };
 
