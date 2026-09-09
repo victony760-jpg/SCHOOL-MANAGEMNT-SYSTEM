@@ -217,8 +217,8 @@ export const updateAdmissionStatus = async (req, res) => {
         emailSent = false;
         emailMessage =
           emailError.statusCode === 503
-            ? "RESEND_API_KEY is missing on the backend"
-            : "Resend rejected the sender or recipient. Verify RESEND_FROM_EMAIL and the verified Resend domain.";
+            ? "EMAIL_USER and EMAIL_PASS are missing on the backend"
+            : "The school email server rejected or could not reach the message. Check the Gmail App Password and Render logs.";
         console.error("Admission email failed:", emailError.message);
       }
     }
