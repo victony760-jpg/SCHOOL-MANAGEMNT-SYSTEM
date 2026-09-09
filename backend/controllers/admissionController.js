@@ -145,6 +145,7 @@ export const updateAdmissionStatus = async (req, res) => {
     if (!submission) return error(res, "Application not found", 404);
 
     let emailSent = true;
+    let emailMessage = null;
 
     if (status === "Approved") {
       const existingProfile = await StudentProfile.findOne({
@@ -214,6 +215,10 @@ export const updateAdmissionStatus = async (req, res) => {
         });
       } catch (emailError) {
         emailSent = false;
+        emailMessage =
+          emailError.statusCode === 503
+            ? "RESEND_API_KEY is missing on the backend"
+            : "Resend rejected the sender or recipient. Verify RESEND_FROM_EMAIL and the verified Resend domain.";
         console.error("Admission email failed:", emailError.message);
       }
     }
@@ -223,7 +228,7 @@ export const updateAdmissionStatus = async (req, res) => {
     await submission.populate("classApplying", "fullClassName");
     return success(
       res,
-      { submission, emailSent },
+      { submission, emailSent, emailMessage },
       emailSent
         ? `Status updated to ${status}`
         : `Status updated to ${status}, but the email could not be sent`,

@@ -28,8 +28,8 @@ const AdminAdmissions = () => {
     setUpdatingId(id);
     try {
       const response = await updateAdmissionStatus(id, status);
-      if (response.data?.emailSent === false) {
-        toast.warning(`Application ${status}, but the email could not be sent. Check the backend email settings.`);
+      if (response.data?.data?.emailSent === false) {
+        toast.warning(response.data.data.emailMessage || `Application ${status}, but the email could not be sent.`);
       } else {
         toast.success(`Application ${status}`);
       }
