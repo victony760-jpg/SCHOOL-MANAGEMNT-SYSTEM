@@ -7,6 +7,7 @@ import StudentProfile from "../models/StudentProfile.js";
 import { generateStudentId } from "../services/studentIdGenerator.js";
 import crypto from "crypto";
 import sendEmail from "../utils/sendEmail.js";
+import mongoose from "mongoose";
 
 export const submitAdmission = async (req, res) => {
   try {
@@ -24,6 +25,10 @@ export const submitAdmission = async (req, res) => {
 
     if (!fullName || !email || !parentName || !dob || !classApplying) {
       return error(res, "Missing required fields", 400);
+    }
+
+    if (!mongoose.isValidObjectId(classApplying)) {
+      return error(res, "Invalid class selected", 400);
     }
 
     const classExists = await Class.findById(classApplying);

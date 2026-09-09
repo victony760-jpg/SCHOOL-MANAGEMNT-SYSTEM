@@ -47,6 +47,25 @@ const Admissions = () => {
       return;
     }
 
+    if (!formData.applicantPhoto) {
+      toast.error('Please select an applicant photo before submitting.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    const allowedPhotoTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowedPhotoTypes.includes(formData.applicantPhoto.type)) {
+      toast.error('Applicant photo must be JPG, PNG, or WEBP.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (formData.applicantPhoto.size > 10 * 1024 * 1024) {
+      toast.error('Applicant photo must be smaller than 10 MB.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const data = new FormData();
       Object.keys(formData).forEach(key => {
@@ -59,6 +78,7 @@ const Admissions = () => {
       setFormData(initialFormState);
       setTimeout(() => setSubmitted(false), 5000);
     } catch (err) {
+      console.error('Admission submission failed:', err.response?.data || err);
       toast.error(
         err.code === 'ECONNABORTED'
           ? 'The upload is taking too long. Please try again.'
