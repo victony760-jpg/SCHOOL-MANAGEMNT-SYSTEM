@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 const sendEmail = async (options) => {
   const emailUser = process.env.EMAIL_USER?.trim();
-  const emailPass = process.env.EMAIL_PASS?.trim();
+  const emailPass = process.env.EMAIL_PASS?.replace(/\s+/g, "");
   if (!emailUser || !emailPass) {
     const err = new Error("EMAIL_USER and EMAIL_PASS must be configured");
     err.statusCode = 503;
